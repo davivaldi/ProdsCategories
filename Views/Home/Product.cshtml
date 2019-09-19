@@ -1,0 +1,34 @@
+@model AddCategoryViewModel
+
+
+<div class="container">
+    <div class="row" > 
+        <h1> @Model.Product.Name</h1>   
+       
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Categories:</h3>
+                 @foreach (Associations item in Model.Product.Associations )
+                {
+                    <p>@item.Category.Name</p>
+                }
+        </div>
+
+        <div class="col">
+            <h3> Add Category: </h3>
+        <form asp-action="AddCategory" asp-controller="Home" method="Post">
+            <input hidden asp-for="Association.ProductId" value="@Model.Product.ProductId"> 
+                <select asp-for="Association.CategoryId">
+                    @foreach (Category item in Model.Categories )
+                    {
+                        <option value="@item.CategoryId"><p>@item.Name</p></option>
+                    }
+                </select>
+            <input type="submit" value="Add">
+        </form>  
+        </div>
+
+    </div>
+
+</div>
